@@ -41,6 +41,7 @@ namespace CustomerApiService.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<ActionResult<Customer>> Customer([FromBody] UpdateCustomerDto customerDto)
         {
             try
