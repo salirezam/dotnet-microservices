@@ -27,6 +27,20 @@ namespace CustomerApiService.Controllers
             this.mediator = mediator;
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Customer>>> AllCustomers()
+        {
+            try
+            {
+                var query = new GetAllEntitiesQuery<Customer>();
+                return (await mediator.Send(query)).ToList();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost]
         public async Task<ActionResult<Customer>> Customer([FromBody] CreateCustomerDto customerDto)
         {

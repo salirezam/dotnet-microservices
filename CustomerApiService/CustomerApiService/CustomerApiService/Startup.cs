@@ -44,6 +44,7 @@ namespace CustomerApiService
             services.AddTransient<IRequestHandler<UpdateEntityCommand<Customer>, Customer>, UpdateEntityCommandHandler<Customer>>();
             services.AddTransient<IRequestHandler<DeleteEntityCommand<Customer>, Customer>, DeleteEntityCommandHandler<Customer>>();
             services.AddTransient<IRequestHandler<GetEntityByIdQuery<Customer>, Customer>, GetEntityByIdQueryHandler<Customer>>();
+            services.AddTransient<IRequestHandler<GetAllEntitiesQuery<Customer>, IEnumerable<Customer>>, GetAllEntitiesQueryHandler<Customer>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
