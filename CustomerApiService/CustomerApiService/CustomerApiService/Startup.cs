@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using CustomerApiService.Dtos;
+using CustomerApiService.Validators;
 using Data.Database;
 using Data.Repository;
 using Domain.Entities;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -32,8 +35,11 @@ namespace CustomerApiService
             services.AddMvc().AddFluentValidation();
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddTransient(typeof(IRepository<>),typeof(IRepository<>));
             services.AddTransient<IRepository<Customer>, CustomerRepository>();
+
+            services.AddTransient<IValidator<CreateCustomerDto>, CreateCustomerDtoValidator>();
+            services.AddTransient<IValidator<UpdateCustomerDto>, UpdateCustomerDtoValidator>();
+
             services.AddTransient<IRequestHandler<CreateEntityCommand<Customer>, Customer>, CreateEntityCommandHandler<Customer>>();
             services.AddTransient<IRequestHandler<UpdateEntityCommand<Customer>, Customer>, UpdateEntityCommandHandler<Customer>>();
             services.AddTransient<IRequestHandler<DeleteEntityCommand<Customer>, Customer>, DeleteEntityCommandHandler<Customer>>();
@@ -58,10 +64,7 @@ namespace CustomerApiService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
