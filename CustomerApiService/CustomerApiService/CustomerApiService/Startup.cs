@@ -1,12 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
+using Data.Database;
+using Data.Repository;
+using Domain.Entities;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Service.CommandHandlers;
+using Service.Commands;
+using Service.Queries;
 
 namespace CustomerApiService
 {
@@ -16,6 +27,17 @@ namespace CustomerApiService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CustomerContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            services.AddAutoMapper(typeof(Startup));
+            services.AddMvc().AddFluentValidation();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddTransient(typeof(IRepository<>),typeof(IRepository<>));
+            services.AddTransient<IRepository<Customer>, CustomerRepository>();
+            services.AddTransient<IRequestHandler<CreateEntityCommand<Customer>, Customer>, CreateEntityCommandHandler<Customer>>();
+            services.AddTransient<IRequestHandler<UpdateEntityCommand<Customer>, Customer>, UpdateEntityCommandHandler<Customer>>();
+            services.AddTransient<IRequestHandler<DeleteEntityCommand<Customer>, Customer>, DeleteEntityCommandHandler<Customer>>();
+            services.AddTransient<IRequestHandler<GetEntityByIdQuery<Customer>, Customer>, GetEntityByIdQueryHandler<Customer>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,6 +47,12 @@ namespace CustomerApiService
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
