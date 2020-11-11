@@ -49,7 +49,7 @@ namespace Data.Database
             modelBuilder.HasAnnotation("ProductVersion", "1.0");
 
             modelBuilder.Entity<Customer>(entity => {
-                entity.Property(e => e.Id).HasDefaultValue("(newid())");
+                entity.Property(e => e.Id).HasDefaultValue(new Guid());
                 entity.Property(e => e.Birthday).HasColumnType("date");
                 entity.Property(e => e.FirstName).IsRequired();
                 entity.Property(e => e.LastName).IsRequired();
