@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApiService", "OrderApiService\OrderApiService.csproj", "{709E5EC0-2A76-42A1-8274-365FC031BF6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{D131E622-98D2-47BA-867D-705E5B5631BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{709E5EC0-2A76-42A1-8274-365FC031BF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709E5EC0-2A76-42A1-8274-365FC031BF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709E5EC0-2A76-42A1-8274-365FC031BF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709E5EC0-2A76-42A1-8274-365FC031BF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D131E622-98D2-47BA-867D-705E5B5631BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D131E622-98D2-47BA-867D-705E5B5631BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D131E622-98D2-47BA-867D-705E5B5631BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D131E622-98D2-47BA-867D-705E5B5631BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96C20030-F070-414E-BEE9-7438EB41BE31}
+	EndGlobalSection
+EndGlobal
