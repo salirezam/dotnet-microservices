@@ -56,5 +56,23 @@ namespace Data.Repository
 
             return entity;
         }
+
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException($"{nameof(UpdateRangeAsync)} entities must not be null");
+            }
+
+            try
+            {
+                context.UpdateRange(entities);
+                await context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"{nameof(entities)} could not be updated {ex.Message}");
+            }
+        }
     }
 }

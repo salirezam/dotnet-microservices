@@ -12,6 +12,7 @@ namespace Data.Repository
         Task<T> Get(Guid id);
         Task<T> Delete(Guid id);
         Task<T> Update(T entity);
+        Task UpdateRangeAsync(IEnumerable<T> entities);
         Task<T> Add(T entity);
     }
 }
