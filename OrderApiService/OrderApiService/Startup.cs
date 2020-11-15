@@ -2,6 +2,7 @@ using AutoMapper;
 using Data.Database;
 using Data.Repository;
 using Domain.Entities;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrderApiService.Dtos;
+using OrderApiService.Validators;
 using Service.Commands;
 using Service.Queries;
 using System;
@@ -32,6 +35,8 @@ namespace OrderApiService
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IOrderRepository<Order>, OrderRepository>();
+
+            services.AddScoped<IValidator<OrderDto>, OrderDtoValidator>();
 
             services.AddTransient<IRequestHandler<CreateOrderCommand, Order>, CreateOrderCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateOrderCommand>, UpdateOrderCommandHandler>();
