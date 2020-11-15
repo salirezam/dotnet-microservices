@@ -30,12 +30,12 @@ namespace CustomerApiService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomerContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            services.AddDbContext<CustomerContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()), ServiceLifetime.Singleton);
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc().AddFluentValidation();
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddTransient<IRepository<Customer>, CustomerRepository>();
+            services.AddScoped<IRepository<Customer>, CustomerRepository>();
 
             services.AddTransient<IValidator<CreateCustomerDto>, CreateCustomerDtoValidator>();
             services.AddTransient<IValidator<UpdateCustomerDto>, UpdateCustomerDtoValidator>();
