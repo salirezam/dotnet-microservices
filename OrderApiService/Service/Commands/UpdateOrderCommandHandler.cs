@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 
 namespace Service.Commands
 {
-    public class PayOrderCommandHandler : IRequestHandler<PayOrderCommand, Order>
+    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     {
         private readonly IOrderRepository<Order> repository;
 
-        public PayOrderCommandHandler(IOrderRepository<Order> repository)
+        public UpdateOrderCommandHandler(IOrderRepository<Order> repository)
         {
             this.repository = repository;
         }
-        public Task<Order> Handle(PayOrderCommand request, CancellationToken cancellationToken)
+
+        public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            return repository.Update(request.Order);
+            await repository.UpdateRangeAsync(request.Orders);
+            return Unit.Value;
         }
     }
 }

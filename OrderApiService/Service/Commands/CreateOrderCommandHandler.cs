@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace Service.Commands
 {
-    public class PayOrderCommandHandler : IRequestHandler<PayOrderCommand, Order>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Order>
     {
         private readonly IOrderRepository<Order> repository;
 
-        public PayOrderCommandHandler(IOrderRepository<Order> repository)
+        public CreateOrderCommandHandler(IOrderRepository<Order> repository)
         {
             this.repository = repository;
         }
-        public Task<Order> Handle(PayOrderCommand request, CancellationToken cancellationToken)
+
+        public Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            return repository.Update(request.Order);
+            return repository.Add(request.Order);
         }
     }
 }
