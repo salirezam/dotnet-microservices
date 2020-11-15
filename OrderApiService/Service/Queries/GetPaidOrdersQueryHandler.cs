@@ -11,7 +11,7 @@ namespace Service.Queries
 {
     public class GetPaidOrdersQueryHandler : IRequestHandler<GetPaidOrdersQuery, IEnumerable<Order>>
     {
-        private readonly IRepository<Order> repository;
+        private readonly IOrderRepository<Order> repository;
 
         public GetPaidOrdersQueryHandler(IOrderRepository<Order> repository)
         {
@@ -19,7 +19,7 @@ namespace Service.Queries
         }
         public Task<IEnumerable<Order>> Handle(GetPaidOrdersQuery request, CancellationToken cancellationToken)
         {
-            return repository.
+            return repository.GetPaidOrderAsync(cancellationToken);
         }
     }
 }
